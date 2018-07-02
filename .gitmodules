@@ -4,3 +4,6 @@
 [submodule "WebApi"]
 	path = WebApi
 	url = git@github.com:OData/WebApi.git
+[submodule "Mvc"]
+	path = Mvc
+	url = git@github.com:aspnet/Mvc.git
