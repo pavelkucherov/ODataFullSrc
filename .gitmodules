@@ -1,3 +1,6 @@
 [submodule "odata.net"]
 	path = odata.net
 	url = git@github.com:OData/odata.net.git
+[submodule "WebApi"]
+	path = WebApi
+	url = git@github.com:OData/WebApi.git
