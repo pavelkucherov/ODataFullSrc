@@ -7,3 +7,6 @@
 [submodule "Mvc"]
 	path = Mvc
 	url = git@github.com:aspnet/Mvc.git
+[submodule "EntityFrameworkCore"]
+	path = EntityFrameworkCore
+	url = git@github.com:aspnet/EntityFrameworkCore.git
