@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.0" />
+  </ItemGroup>
+
+
+<ItemGroup>
+  <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />  
+  <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
+  <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+  <PackageReference Include="Newtonsoft.Json" Version="11.*" />
+  <PackageReference Include="SendGrid" Version="9.*" />
+  <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+</ItemGroup>
+
+
+<ItemGroup>
+  <ProjectReference Include="..\EntityFrameworkCore\src\EFCore.Relational\EFCore.Relational.csproj" />
+  <ProjectReference Include="..\EntityFrameworkCore\src\EFCore\EFCore.csproj" />
+  <ProjectReference Include="..\Mvc\src\Microsoft.AspNetCore.Mvc\Microsoft.AspNetCore.Mvc.csproj" />
+  <ProjectReference Include="..\odata.net\src\Microsoft.OData.Core\Microsoft.OData.Core.NetStandard.VS2017.csproj" />
+  <ProjectReference Include="..\odata.net\src\Microsoft.OData.Edm\Microsoft.OData.Edm.NetStandard.VS2017.csproj" />
+  <ProjectReference Include="..\WebApi\src\Microsoft.AspNetCore.OData\Microsoft.AspNetCore.OData.csproj" />
+</ItemGroup>
+</Project>
