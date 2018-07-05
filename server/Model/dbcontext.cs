@@ -14,7 +14,13 @@ namespace courses_odata.Model
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<TeachingActivity> TeachingActivities { get; set; }
+        // public DbSet<MultipleChoice> MultipleChoices { get; set; }
+        // public DbSet<Slide> Slides { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course_Student> Course_Student { get; set; }
 
         public CoursesContext() : base()
         {
@@ -26,7 +32,6 @@ namespace courses_odata.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<Course>()
                 .HasMany(p => p.Lectures)
                 .WithOne(b => b.Course)
@@ -37,25 +42,25 @@ namespace courses_odata.Model
                 .WithOne(b => b.Lecture)
                 .HasForeignKey(b => b.LectureId);
 
-            modelBuilder.Entity<Answer>();
-
-            modelBuilder.Entity<Slide>();
-            /*
-            modelBuilder.Entity<MultipleChoice>()
-              .HasMany(p => p.Answers)
-              .WithOne(b => b.MultipleChoice)
-              .HasForeignKey(b => b.MultipleChoiceId);
-
-            modelBuilder.Entity<TeachingActivity>();
-            */
-
-            modelBuilder.Entity<MultipleChoice>();
-
-
             modelBuilder.Entity<TeachingActivity>()
                 .HasMany(p => p.Answers)
                 .WithOne(b => b.TeachingActivity)
                 .HasForeignKey(b => b.TeachingActivityId);
+
+            // modelBuilder.Entity<Slide>()
+            //     .HasBaseType<TeachingActivity>();
+
+            // modelBuilder.Entity<MultipleChoice>()
+            //     .HasBaseType<TeachingActivity>()
+            //     .HasMany(p => p.Answers)
+            //     .WithOne(b => b.MultipleChoice)
+            //     .HasForeignKey(b => b.MultipleChoiceId);
+
+            modelBuilder.Entity<Answer>();
+
+            modelBuilder.Entity<Article>();
+
+            modelBuilder.Entity<Student>();
         }
     }
 }

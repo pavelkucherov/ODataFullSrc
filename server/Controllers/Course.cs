@@ -15,8 +15,16 @@ namespace courses_odata.Controllers
 
     public CourseController(CoursesContext context) => this.context = context;
 
-    // GET: odata/course
-    [EnableQuery]
+    [EnableQuery(MaxExpansionDepth = 6, PageSize = 50)]
+    public SingleResult<Course> Get([FromODataUri] int key)
+    {
+        return SingleResult.Create(context.Courses.Where(c => c.Id == key));
+    }
+
+    //sample calls: /OData/Course?userid=1
+    // /OData/Course?userid=1&$filter=Id+eq+2
+    // /OData/Course/$count?userid=1
+    [SecureEnableQuery(MaxExpansionDepth = 6, PageSize = 50)]
     public IQueryable<Course> Get() => this.context.Courses.AsQueryable();
   }
 }

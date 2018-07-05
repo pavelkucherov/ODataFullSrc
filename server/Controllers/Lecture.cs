@@ -15,8 +15,13 @@ namespace courses_odata.Controllers
 
     public LectureController(CoursesContext context) => this.context = context;
 
-    // GET: odata/lecture
-    [EnableQuery]
+    [EnableQuery(MaxExpansionDepth = 6, PageSize = 50)]
+    public SingleResult<Lecture> Get([FromODataUri] int key)
+    {
+        return SingleResult.Create(context.Lectures.Where(c => c.Id == key));
+    }
+
+    [SecureEnableQuery(MaxExpansionDepth = 6, PageSize = 50)]
     public IQueryable<Lecture> Get() => context.Lectures.AsQueryable();
   }
 }

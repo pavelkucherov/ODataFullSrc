@@ -2,7 +2,7 @@
 
 namespace server.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,9 +53,9 @@ namespace server.Migrations
                     Title = table.Column<string>(nullable: true),
                     Position = table.Column<int>(nullable: false),
                     LectureId = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
                     Question = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true)
+                    Content = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

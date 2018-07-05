@@ -50,7 +50,7 @@ namespace courses_odata
 
       if (env.IsDevelopment())
       {
-        //app.UseDeveloperExceptionPage();
+        app.UseDeveloperExceptionPage();
 
       }
 

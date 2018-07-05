@@ -8,14 +8,14 @@ using courses_odata.Model;
 namespace server.Migrations
 {
     [DbContext(typeof(CoursesContext))]
-    [Migration("20180627125914_Init")]
-    partial class Init
+    [Migration("20180703075210_Student")]
+    partial class Student
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
             modelBuilder.Entity("courses_odata.Model.Answer", b =>
                 {
@@ -35,6 +35,22 @@ namespace server.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("courses_odata.Model.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Articles");
+                });
+
             modelBuilder.Entity("courses_odata.Model.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -49,6 +65,24 @@ namespace server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("courses_odata.Model.Course_Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CourseId");
+
+                    b.Property<int>("StudentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Course_Student");
                 });
 
             modelBuilder.Entity("courses_odata.Model.Lecture", b =>
@@ -73,17 +107,34 @@ namespace server.Migrations
                     b.ToTable("Lectures");
                 });
 
+            modelBuilder.Entity("courses_odata.Model.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("courses_odata.Model.TeachingActivity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<string>("Content");
+
+                    b.Property<int>("Discriminator");
 
                     b.Property<int>("LectureId");
 
                     b.Property<int>("Position");
+
+                    b.Property<string>("Question");
 
                     b.Property<string>("Title");
 
@@ -92,30 +143,6 @@ namespace server.Migrations
                     b.HasIndex("LectureId");
 
                     b.ToTable("TeachingActivities");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("TeachingActivity");
-                });
-
-            modelBuilder.Entity("courses_odata.Model.MultipleChoice", b =>
-                {
-                    b.HasBaseType("courses_odata.Model.TeachingActivity");
-
-                    b.Property<string>("Question");
-
-                    b.ToTable("MultipleChoice");
-
-                    b.HasDiscriminator().HasValue("MultipleChoice");
-                });
-
-            modelBuilder.Entity("courses_odata.Model.Slide", b =>
-                {
-                    b.HasBaseType("courses_odata.Model.TeachingActivity");
-
-                    b.Property<string>("Content");
-
-                    b.ToTable("Slide");
-
-                    b.HasDiscriminator().HasValue("Slide");
                 });
 
             modelBuilder.Entity("courses_odata.Model.Answer", b =>
@@ -123,6 +150,19 @@ namespace server.Migrations
                     b.HasOne("courses_odata.Model.TeachingActivity", "TeachingActivity")
                         .WithMany("Answers")
                         .HasForeignKey("TeachingActivityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("courses_odata.Model.Course_Student", b =>
+                {
+                    b.HasOne("courses_odata.Model.Course", "Course")
+                        .WithMany("Course_Students")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("courses_odata.Model.Student", "Student")
+                        .WithMany("Course_Students")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
